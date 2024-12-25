@@ -197,4 +197,4 @@ int main()
 
 
 
-<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/cpp-process">
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/cpp-process.png">

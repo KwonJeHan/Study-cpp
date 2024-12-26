@@ -489,7 +489,7 @@ for (int ix = 0; ix < 5; ++ix)
 
 new 연산자로 생성된 객체의 주소를 각 배열의 포인터에 저장하고 있으며 생성된 객체는 다음 그림과 같이 저장된다.
 
-
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/ptr-array-img2.jpg">
 
 또한 new 연산자를 통해 동적 할당된 객체는 제거하지 않으면 사용하지 않는데도 메모리가 남아 메모리 릭이 발생하므로 delete로 반드시 해제해야 한다.
 
@@ -608,10 +608,146 @@ int main()
 
 
 
-#### 깊은 복사
+#### 깊은 복사(Deep Copy)
 
 **기본 복사 생성자의 문제점은 다음과 같다.**
 
 * 변수의 값을 그대로 대입한다.
 * 값 타입의 데이터를 다룰 때는 자연스럽게 복사가 일어나기 때문에 문제가 없지만, 포인터 변수의 경우에는 문제가 된다.
 * 포인터 변수도 단순히 값을 복사하기 때문에 결국 같은 주소를 저장하게 된다.
+
+```c++
+#include <iostream>
+
+class Player
+{
+public:
+	Player()
+		: x(0), y(0)
+	{
+		size_t length = strlen("Player") + 1;
+		name = new char[length];
+		strcpy_s(name, length, "Player");
+	}
+
+	Player(const char* name, int x, int y)
+		: x(x), y(y)
+	{
+		size_t length = strlen(name) + 1;
+		this->name = new char[length];
+		strcpy_s(this->name, length, name);
+	}
+
+	~Player()
+	{
+		delete[] name;
+	}
+
+	void Print()
+	{
+		std::cout << "name: " << name << ", " << x << ", " << y << "\n";
+	}
+
+private:
+	int x;
+	int y;
+	char* name;
+};
+
+int main()
+{
+	Player player1("Player", 10, 20);
+	Player player2(player1);
+
+	player1.Print();
+	player2.Print();
+}
+```
+
+해당 코드엔 문제가 없어 보이지만, 실행하면 오류가 발생한다.
+
+
+
+**문제의 원인 = 얕은 복사**
+
+main 함수에서 player2 객체를 생성할 때 player1을 입력 받아 복사해 생성한다. 이 때 x, y 변수 뿐만 아니라 name 변수도 단순히 대입하는 형태로 복사를 진행한다. 이렇게 되면 player1의 name과 player2의 name 변수가 같은 위치를 가리키게 된다.
+
+```c++
+Player player2 = Player(player1);
+```
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/s-paste1.jpg">
+
+문제는 객체가 소멸될 때 발생한다. 소멸자의 호출은 보통 반대 순서로 처리되므로 player2의 소멸자가 생성되면, name이 가리키는 공간의 메모리를 해제한다. 이때 player1 역시 소멸자를 호출해 name이 가리키는 메모리를 해제하려 하는데 이 공간은 이미 해제되었기 때문에 문제가 발생한다.
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/s-paste2.jpg">
+
+해당 문제를 해결하기 위해선 **깊은 복사**를 해 주소 값을 단순히 대입하는 형태가 아닌 동적 할당으로 메모리 공간을 확보한 뒤 문자열 복사 함수를 사용해 복사를 처리한다.
+
+```c++
+#include <iostream>
+
+class Player
+{
+public:
+	Player()
+		: x(0), y(0)
+	{
+		size_t length = strlen("Player") + 1;
+		name = new char[length];
+		strcpy_s(name, length, "Player");
+	}
+
+	Player(const char* name, int x, int y)
+		: x(x), y(y)
+	{
+		size_t length = strlen(name) + 1;
+		this->name = new char[length];
+		strcpy_s(this->name, length, name);
+	}
+
+	Player(const Player& other)
+	{
+		x = other.x;
+		y = other.y;
+		
+		size_t length = strlen(other.name) + 1;
+		name = new char[length];
+		strcpy_s(name, length, other.name);
+	}
+
+	~Player()
+	{
+		delete[] name;
+	}
+
+	void Print()
+	{
+		std::cout << "name: " << name << ", " << x << ", " << y << "\n";
+	}
+
+private:
+	int x;
+	int y;
+	char* name;
+};
+
+int main()
+{
+	Player player1("Player", 10, 20);
+	Player player2(player1);
+
+	player1.Print();
+	player2.Print();
+}
+```
+
+포인터 변수를 사용해 동적 할당과 소멸을 처리하는 경우 깊은 복사가 필요하다는 것을 명심하자.
+
+
+
+#### 복사 생성자의 호출 시점
+
+1. 기존에 생성된 객체로 새로운 객체를 초기화하는 경우
+2. 함수 호출 시 객체를 값에 의해 전달하는 경우(Call By Value)
+3. 함수 내에서 객체를 값에 의해 반환(리턴)하는 경우

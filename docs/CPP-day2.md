@@ -1,6 +1,6 @@
 # C++ 학습 정리
 
-**[포텐업] 게임 개발자 양성 과정**
+**2024/12/2[포텐업] 게임 개발자 양성 과정**
 
 ---
 
@@ -673,7 +673,7 @@ int main()
 main 함수에서 player2 객체를 생성할 때 player1을 입력 받아 복사해 생성한다. 이 때 x, y 변수 뿐만 아니라 name 변수도 단순히 대입하는 형태로 복사를 진행한다. 이렇게 되면 player1의 name과 player2의 name 변수가 같은 위치를 가리키게 된다.
 
 ```c++
-Player player2 = Player(player1);
+Player player2(player1);
 ```
 
 <img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/s-paste1.jpg">
@@ -711,6 +711,10 @@ public:
 		x = other.x;
 		y = other.y;
 		
+        // 얕은 복사.
+		//name = other.name;
+        
+        // 깊은 복사
 		size_t length = strlen(other.name) + 1;
 		name = new char[length];
 		strcpy_s(name, length, other.name);

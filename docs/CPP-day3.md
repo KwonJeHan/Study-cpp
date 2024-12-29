@@ -430,7 +430,7 @@ int main()
 
 추상 클래스는 선언만 있고 본문이 없는 멤버 함수를 가지므로 그대로는 인스턴스를 생성할 수 없다. 실제로 위 코드 main 함수의 주석을 해제하면 오류가 발생한다.
 
-이렇게 보면 추상 클래스는 의미가 없어보이지만, 설계 측면에서 객체 집합의 틀을 제공한다는 의미에서 중요하다.
+이렇게 보면 추상 클래스는 의미가 없어 보이지만, 설계 측면에서 객체 집합의 틀을 제공한다는 의미에서 중요하다.
 
 위 예제를 보면 Line, Circle, Rectangle 등의 집합에서 필수로 제공해야 하는 Draw 함수의 구현을 Graphics 클래스를 통해 강제하는 것을 볼 수 있다.
 
@@ -444,5 +444,130 @@ C++ 은 인터페이스 문법이 없지만 인터페이스의 **"함수의 본�
 
 ### 연산자 오버로딩
 
+**연산자(operator)를 원하는 기능으로 전환해 함수처럼 사용할 수 있도록 도와주는 기능**
+
+이전 페이지에서 함수는 오버리딩이 가능한 것을 볼 수 있는데 연산자 또한 함수이다. 따라서 오버리딩이 가능해 벡터 연산 등에 +와 *등의 연산자를 사용하여 더 가독성 명에서 좋은 코드를 작성할 수 있다.
+
+```c++
+#include <iostream>
+
+struct Vector2
+{
+	float x, y;
+
+	Vector2(float x, float y) : x(x), y(y) { }
+
+	Vector2 Add(const Vector2& other) const
+	{
+		//return Vector2(x + other.x, y + other.y);
+		return *this + other;
+	}
+
+	Vector2 operator+(const Vector2& other) const
+	{
+		return Vector2(x + other.x, y + other.y);
+	}
+
+	Vector2 Multiply(const Vector2& other) const
+	{
+		return Vector2(x * other.x, y * other.y);
+	}
+
+	Vector2 operator*(const Vector2& other) const
+	{
+		return Multiply(other);
+	}
+
+	void Print()
+	{
+		std::cout << "(x: " << x << " y: " << y << ")\n";
+	}
+};
+
+int main()
+{
+	Vector2 position(4.0f, 4.0f);
+	Vector2 speed(0.5f, 0.5f);
+	Vector2 powerup(1.1f, 1.1f);
+
+	Vector2 result = position.Add(speed.Multiply(powerup));
+	Vector2 result2 = position + speed * powerup;
+
+	result.Print();
+	result2.Print();
+
+	std::cin.get();
+}
+```
+
+위 코드를 보면 벡터를 출력하기 위해 별도의 Print 함수를 정의해 사용했는데 << 역시 연산자이므로 이를 오버로딩하여 std::cout 함수에 직접 전달하여 출력할 수 있다.
+
+```c++
+#include <iostream>
+
+struct Vector2
+{
+	float x, y;
+
+	Vector2(float x, float y) : x(x), y(y) { }
+
+	Vector2 Add(const Vector2& other) const
+	{
+		//return Vector2(x + other.x, y + other.y);
+		return *this + other;
+	}
+
+	Vector2 operator+(const Vector2& other) const
+	{
+		return Vector2(x + other.x, y + other.y);
+	}
+
+	Vector2 Multiply(const Vector2& other) const
+	{
+		return Vector2(x * other.x, y * other.y);
+	}
+
+	Vector2 operator*(const Vector2& other) const
+	{
+		return Multiply(other);
+	}
+
+	void Print()
+	{
+		std::cout << "(x: " << x << " y: " << y << ")\n";
+	}
+};
+
+std::ostream& operator <<(std::ostream& stream, const Vector2 other)
+{
+	stream << "(x: " << other.x << ", " << other.y << ")";
+	return stream;
+}
+
+int main()
+{
+	Vector2 position(4.0f, 4.0f);
+	Vector2 speed(0.5f, 0.5f);
+	Vector2 powerup(1.1f, 1.1f);
+
+	Vector2 result1 = position.Add(speed.Multiply(powerup));
+	Vector2 result2 = position + speed * powerup;
+
+	std::cout << result1 << "\n";
+	std::cout << result2 << "\n";
+
+	std::cin.get();
+}
+```
 
 
+
+#### 연산자 오버리딩 시 주의사항
+
+1. 의도를 벗어난 연산자 오버리딩은 하지 말자
+   * +연산자를 사용해 뺄셈이나 곱셈을 처리하는 등
+
+2. 연산자 우선순위와 결합성을 바꿀 수는 없다.
+   * 오버리딩은 가능해도 해당 연산자가 가지는 우선 순위와 결합성은 그대로 유지된다.
+3. 기본 매개변수 설정 불가
+   * 연산자 오버로딩 특성 상 기본 매개변수(파라미터)를 설정하면 함수의 호출 관계가 불명확해 지므로 설정이 불가능하도록 설계되어 있다.

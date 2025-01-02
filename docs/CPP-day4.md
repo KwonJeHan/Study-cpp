@@ -180,7 +180,7 @@ int main()
 
 ---
 
-### 파일 입출력
+### C 스타일 파일 입출력
 
 
 
@@ -360,3 +360,158 @@ int fprintf(FILE* stream, const char* format, ...);
 
 #### 파일의 임의 접근
 
+파일 스트림은 다음에 입출력을 진행할 파일의 위치를 항상 기억하고 있다.이 위치를 FP(FilePosition)라고 한다. 처음 파일을 열면 FP가 파일의 첫 부분을 가리키며 내용을 일거나 쓰면 액세스 한 만큼 FP가 자동으로 뒤로 이동하는데 이런 방식을 순차 접근이라고 한다.
+
+**반면, 원하는 위치로 한 번에 이동하면서 읽는 방법을 임의 접근이라고 한다.**
+
+
+
+**fseek 함수**
+
+첫 번째 파라미터는 대상 스트림, 두 번째 파라미터 offset는 FP를 어디로 옮길 지 지정, 세 번째 파라미터 origin는 어느 위치를 기준으로 FP를 옮길 것인지 지정한다.
+
+세 번째 파라미터에서 사용할 수 있는 값
+
+1. SEEK_SET: 스트림 처음 위치 기준
+2. SEEK_CUR: 현재 위치 기준 (방향에 따라 음수, 양수 모두 가능)
+3. SEEK_END: 스트림의 끝 위치 기준 (offset이 음수여야 한다.)
+
+```c++
+int fseek(FILE* stream, long offset, int origin);
+```
+
+
+
+**ftell/rewind 함수**
+
+**ftell 함수는 FP의 현재 위치를 반환한다.** 일반적으로는 파일의 전체 크기를 확인하기 위해 fseek(file, 0, SEEK_END) 함수를 사용해 파일의 끝 위치로 FP를 이동 시킨 후 ftell 함수를 통해 FP의 위치를 구하는 방식으로 활용한다.
+
+**rewind는 FP를 다시 처음으로 되돌릴 때 사용한다.** rewind는 fseek(file, 0, SEEK_SET)과 동일한 기능을 제공한다.
+
+---
+
+### C++ 스타일 파일 입출력
+
+
+
+#### offstream과 ifstream
+
+파일 입출력에 사용되는 클래스로 char 타입을 대상으로 한다. (wifstream과 wofstream 클래스는 wchar_t 타입을 대상으로 하는 클래스)
+
+(fstream 헤더 파일 에 선언되어 있으므로 헤더를 포함시켜야 한다.)
+
+
+
+**파일 출력 예제**
+
+```c++
+#include <iostream>
+#include <fstream>
+
+int main()
+{
+	std::ofstream file;
+	file.open("CPP_Test.txt");
+	file << "String " << 132756 << " " << 3.141592 << "\n";
+	file.close();
+}
+```
+
+
+
+**파일 입력 예제**
+
+```c++
+#include <iostream>
+#include <fstream>
+
+int main()
+{
+	std::ifstream file("CPP_Test.txt");
+	char stringData[256];
+	int intData;
+	float floatData;
+
+	file >> stringData >> intData >> floatData;
+	std::cout << stringData << " " << intData << " "  << floatData << "\n";
+	file.close();
+}
+```
+
+
+
+#### 파일 열기 확인
+
+ifstream으로 파일을 읽을 때 파일이 없는 경우, 오류가 발생한다. 이를 위해 is_open 함수를 사용해 파일이 제대로 열렸는지 확인할 수 있다.
+
+```c++
+#include <iostream>
+#include <fstream>
+
+int main()
+{
+	std::ifstream file("Ronnie.txt");
+	if (file.is_open())
+	{
+		std::cout << "파일 열기 성공\n";
+	}
+	else
+	{
+		std::cout << "파일 열기 실패\n";
+	}
+}
+```
+
+파일이 없기 때문에 "파일 열기 실패"가 출력된다.
+
+
+
+#### 모드
+
+파일을 열 때 사용하는 open 함수는 mode를 지정할 수 있다.
+
+| **모드**         | **설명**                                                     |
+| ---------------- | ------------------------------------------------------------ |
+| ios_base::in     | 입력용으로 파일을 연다.                                      |
+| ios_base::out    | 출력용으로 파일을 연다.                                      |
+| ios_base::app    | 파일 끝에 데이터를 추가하는 모드로 파일을 연다. 데이터를 추가하는 것만 가능하다. |
+| ios_base::ate    | 파일을 열자마자 FP를 파일의 끝 위치로 이동시킨다. FP를 임의의 위치로 이동 시킬 수 있다. |
+| ios_base::trunc  | 파일이 이미 존재하는 경우, 데이터를 모두 지워 크기를 0으로 만든다. |
+| ios_base::binary | 텍스트 모드가 아닌 바이너리 파일 모드로 연다.                |
+
+
+
+#### read와 write 함수
+
+파일을 읽고 쓸 때 사용한다.
+
+```c++
+basic_istremm& read(char *stream, streamsize size);
+basic_ostream& write(const char *stream, streamsize size);
+```
+
+
+
+#### 임의 접근
+
+FP를 임의의 위치로 이동시킬 때 두 가지 함수를 사용할 수 있다. 입력용, 출력용 FP를 따로 유지하기 위해 두 가지 함수가 있다.
+
+첫 번째 파라미터는 어느 위치로 이동할 것인지를 나타내고 두 번째 파라미터는 이동의 기준점을 나타낸다.
+
+두 번째 파라미터는 ios_base::beg, ios_base::cur, ios_base::end를 지정할 수 있으며 각각 파일의 시작 위치, 현재 위치, 파일의 끝 위치를 기준점으로 지정하는데 사용한다
+
+```c++
+basic_istream& seekg(off_type off, ios_base::seek_dir way);    // 입력용 임의 접근 함수.
+basic_ostream& seekp(off_type off, ios_base::seek_dir way);    // 출력용 임의 접근 함수.
+```
+
+
+
+#### 파일의 현재 위치 반환 함수
+
+C의 ftell과 같은 기능을 하며 각각 입력용, 출력용 함수를 구분해 제공된다.
+
+```c++
+pos_type tellg();
+pos_type tellp();
+```

@@ -2,6 +2,12 @@
 
 
 
+**2025/01/02 목표**
+
+Engine(GameEngine)
+
+* Gameloop
+
 ### 게임 루프
 
 현재 프레임 - 이전 프레임 = deltaTime
@@ -14,5 +20,20 @@
 
 
 
-### 프레임
+**2025/01/03 목표**
 
+Engine(GameEngine)
+
+* Singleton
+
+Actor (물체)
+
+Level/Scene (레벨)
+
+RTTI (RunTime Type Information)
+
+* dynamic_cast
+
+PCH (PreCompiledHeader)
+
+DLL (Dynamic Linking Library)

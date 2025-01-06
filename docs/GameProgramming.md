@@ -36,4 +36,22 @@ RTTI (RunTime Type Information)
 
 PCH (PreCompiledHeader)
 
+* 컴파일 시간 단축을 위해 사용
+
 DLL (Dynamic Linking Library)
+
+
+
+**2025/01/06 목표**
+
+Core.h 헤더 추가
+
+* 메모리 릭 검사 추가
+
+* 메모리 삭제 함수 추가
+
+* 콘솔 출력 함수 Log 추가
+
+RTTI.h 추가
+
+빌드 이벤트 추가

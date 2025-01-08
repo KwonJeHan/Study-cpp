@@ -400,7 +400,7 @@ Player players[5];
 
 배열 안에서 생성되는 객체는 다음 그림과 같은 형태가 된다.
 
-<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/array-img.png">
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/array-img.jpg">
 
 여기서 중요한 점은 객체가 배열 안에 존재한다는 것이다.
 

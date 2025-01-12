@@ -69,7 +69,3 @@ shared_ptr은 스마트 포인터가 관리하는 객체의 참조 횟수가 0�
 이런 문제를 해결하기 위해 도입된 것이 weak_ptr이다.
 
 weak_ptr은 그 자체로는 사용할 수 없고 lock() 함수를 통해 shared_ptr로 변환해야 한다.
-
-
-
-4단계 snprint 사용 팁

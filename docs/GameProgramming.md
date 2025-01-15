@@ -144,3 +144,23 @@ FlightShootingGame
 TextScrollDemo
 
 메뉴 생성
+
+
+
+**2025/01/15 목표**
+
+콘솔 엔진 프로그래밍
+
+FlightShootingGame
+
+* Actor의 IsActive 함수 -> isActive && !isExpired 로 조건 변경
+* DrawableActor에 Width() Getter 추가
+* TestLevel의 Update에서 적 생성 로직을 SpawnEnemy 함수로 분리
+* 적 종류 추가
+* 플레이어 탄약과 적 비행기 충돌 처리
+* 적 탄약과 플레이어 충돌 처리
+* DrawableActor에 Intersect 함수 추가
+* 적 비행이 탄약 생성
+* 문자 만들 때 한자로 변환해보기  - ● ▲ ★ ◆ ♠ ♥
+
+SokobanGame

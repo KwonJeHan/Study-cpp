@@ -1,4 +1,4 @@
-# 객체 지향 프로그래밍
+# 언리얼 C++ 학습 정리
 
 **2025/03/31 [포텐업] 게임 개발자 양성 과정**
 
@@ -74,7 +74,7 @@ https://dev.epicgames.com/documentation/ko-kr/unreal-engine/epic-cplusplus-codin
 
 
 
-## 언리얼 C++ 기본 타입
+## 언리얼 C++ 기본 타입과 문자열
 
 **게임 제작의 특징**
 

@@ -58,13 +58,7 @@
 
 ## 캐릭터와 입력 시스템
 
-
-
-
-
-
-
-## 블루프린트 캐릭터 CPP 캐릭터로 구현
+### 블루프린트 캐릭터 CPP 캐릭터로 구현
 
 <img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/1.includepath.png">
 
@@ -218,6 +212,18 @@ Move와 Look 함수를 구현한다.
 
 ---
 
-<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/27.SetMovementAndbUseControllerRotation">
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/27.SetMovementAndbUseControllerRotation.png">
 
 Movement와 bUseControllerRotation을 설정해 움직임에 어색한 점을 수정한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/28.IA_MoveAddModifiers.png">
+
+언리얼 에디터에서 IA_Move에 Moditiers에 Swizzle->YXZ를 추가해 C++ 클래스에서 사용하는 축과 맞춘다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/29.ChangeAddMoveInputAxis.png">
+
+축을 동일하게 맞추었으므로 C++ 클래스에서 설정했던 축도 바꾼다.

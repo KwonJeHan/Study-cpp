@@ -24,13 +24,13 @@
 
 <img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/82.SetDataAsset.png">
 
-만들어놓은 C++ 클래스를 기반으로 언리얼 에디터에서 DataAsset을 만들고 수치를 조정한다.
+만들어놓은 C++ 클래스를 기반으로 언리얼 에디터에서 DataAsset을 만들고 수치를 조정한다. (FrameRate는 애니메이션 시퀸스의SourceFrameRate 수치이다.)
 
 ---
 
 <img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/83.ModifyAnimationBlueprint.png">
 
-애니메이션 블루프린트의 내용을 수정한다.
+애니메이션 블루프린트의 내용을 수정한다. (공격 애니메이션 몽타주가 있는 DefalultSlot 추가)
 
 ---
 

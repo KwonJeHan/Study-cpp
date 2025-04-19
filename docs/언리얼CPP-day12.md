@@ -83,3 +83,59 @@ UMG 모듈을 사용하기 위해 프로젝트 빌드 파일에 내용을 추가
 <img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/150.AddSectionToABCharacterBase.cpp2.png">
 
 생성한 스텟 컴포넌트와 위젯 컴포넌트를 캐릭터에서 사용하기 위해 Stat/Widget Section의 내용을 구현한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/151.CreateABCharacterWidgetInterfaceCPPClass.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/152.ImplementABCharacterWidgetInterface.h.png">
+
+캐릭터에 내 정보(위젯)을 전달할 때 강참조를 피하기 위해 우회해서 전달(느슨한 결합)하기 위한 인터페이스 클래스를 생성하고 구현한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/153.CreateABUserWidgetCPPClass.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/154.ImplementABUserWidget.h.png">
+
+위젯의 소유 액터 설정을 위한 유저 위젯 C++ 클래스를 생성하고 구현한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/155.ModifyABHpBarWidget.h.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/156.ModifyABHpBarWidget.cpp.png">
+
+ABHpBarWidget 클래스의 상속 클래스를 변경하고 캐릭터에 정보(위젯)를 전달하는 부분을 추가한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/157.CreateABWidgetComponentCPPClass.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/158.ImplementABWidgetComponent.h.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/159.ImplementABWidgetComponent.cpp.png">
+
+위젯 컴포넌트 C++ 클래스를 생성하고 헤더 파일과 cpp 파일의 내용을 구현한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/160.ModifyABCharacterBase.h1.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/161.ModifyABCharacterBase.h2.png">
+
+ABCharacterBase 클래스의 상속 클래스를 추가하고 위젯 세팅 및 초기화 이후 호출 함수, 위젯 리소스 설정을 위한 변수를 선언한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/162.ModifyABCharacterBase.cpp1.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/163.ModifyABCharacterBase.cpp2.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/164.ModifyABCharacterBase.cpp3.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/165.ModifyABCharacterBase.cpp4.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/166.ModifyABCharacterBase.cpp5.png">
+
+의도한 바에 맞게 ABCharacterBase cpp파일의 내용을 수정하고 구현한다.

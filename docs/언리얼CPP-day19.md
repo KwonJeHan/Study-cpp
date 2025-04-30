@@ -6,7 +6,7 @@
 
 ## 헤드업디스플레이(HUD)의 구현
 
-<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/329.CreateUserWidgetBlueprint(WBP_ABHUD).png.png">
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/329.CreateUserWidgetBlueprint(WBP_ABHUD).png">
 
 <img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP/330.SetWBP_ABHUD.png">
 

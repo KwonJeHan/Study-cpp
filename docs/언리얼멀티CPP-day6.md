@@ -80,7 +80,54 @@ MulticastRPC 함수는 서버와 본인 클라이언트를 제외한 나머지 �
 
 <img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/112.ModifyABCharacterPlayer.h.png">
 
-ABCharacterPlayer 클래스의 헤더 파일에 액터 충돌 판정을 위한 ServerRPC 함수를 추가로 선언한다.
+ABCharacterPlayer 클래스의 헤더 파일에 공격 판정을 확인하는 함수와 Debug Draw를 위한 함수를 선언하고 액터 충돌 판정을 위한 ServerRPC 함수를 추가로 선언한다.
 
 ---
 
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/113.ModifyABCharacterPlayer.cpp1.png">
+
+ABCharacterPlayer 클래스의 cpp 파일에 헤더 파일에서 정의한 ServerRPC 함수를 사용해 AttackHitCheck 함수에 로직을 추가한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/114.ModifyABCharacterPlayer.cpp2.png">
+
+헤더 파일에서 선언한 AttackHitConfirm 함수와 DrawDebugAttackRange 함수를 구현한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/115.ModifyABCharacterPlayer.cpp3.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/116.ModifyABCharacterPlayer.cpp4.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/117.ModifyABCharacterPlayer.cpp5.png">
+
+헤더 파일에서 액터 충돌 판정을 위해 선언한 ServerRPC 함수를 구현한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/118.ModifyABCharacterPlayer.h.png">
+
+ABCharacterPlayer 클래스의 헤더 파일 내용을 수정한다.
+
+공격 명령을 서버와 AutonomouseProxy를 제외한 나머지 클라이언트에만 전달하도록 ClientRPC 호출을 적용하기 위해 함수를 선언한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/119.ModifyABCharacterPlayer.cpp1.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/120.ModifyABCharacterPlayer.cpp2.png">
+
+cpp 파일 내용도 헤더 파일에서 수정한 목적과 동일하게 수정한다.
+
+필요한 헤더 파일을 추가하고 선언한 ClientRPC 함수 로직을 구현한다.
+
+---
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/121.ModifyABCharacterPlayer.cpp3.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/122.ModifyABCharacterPlayer.cpp4.png">
+
+<img src= "https://github.com/KwonJeHan/Study-cpp/blob/main/img/UECPP_Multi/123.ModifyABCharacterPlayer.cpp5.png">
+
+선언하고 구현한 로직에 맞게 다른 함수의 로직들도 수정한다.
